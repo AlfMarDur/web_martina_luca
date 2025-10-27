@@ -1,87 +1,112 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Martina ❤️ Luca - Benvenuti</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden;
-      background-color: #fff;
+      width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
+      background-color: #fff;
+      overflow: hidden;
     }
 
     .envelope-container {
       position: relative;
       width: 100vw;
       height: 100vh;
-      overflow: hidden;
       cursor: pointer;
-      background-color: #fff;
     }
 
+    /* Mitades del sobre */
     .half {
       position: absolute;
       top: 0;
-      width: 50vw;
-      height: 100vh;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      transition: transform 1.2s ease-in-out;
-      z-index: 2;
+      width: 50%;
+      height: 100%;
+      overflow: hidden;
     }
 
-    .left {
-      left: 0;
-      background-image: url('images/envelope-left.png');
+    .half img {
+      position: absolute;
+      top: 0;
+      width: 200%; /* duplicamos ancho para mostrar solo la mitad */
+      height: 100%;
+      object-fit: cover;
     }
 
-    .right {
+    .half.left img {
+      left: 0; /* mostrar la mitad izquierda */
+    }
+
+    .half.right {
       right: 0;
-      background-image: url('images/envelope-right.png');
     }
 
-    /* Estado animado: el sobre se abre */
-    .open .left {
+    .half.right img {
+      left: -100%; /* mostrar la mitad derecha */
+    }
+
+    /* Animación apertura */
+    .open .half.left {
       transform: translateX(-100%);
+      transition: transform 1.2s ease-in-out;
     }
 
-    .open .right {
+    .open .half.right {
       transform: translateX(100%);
+      transition: transform 1.2s ease-in-out;
     }
 
-    /* Fade-out antes de entrar a main.html */
+    /* Fade-out */
     .fade-out {
       opacity: 0;
       transition: opacity 0.6s ease-in-out;
+    }
+
+    /* Media query para móviles */
+    @media (max-width: 480px) {
+      .half img {
+        width: 200%; /* misma lógica para móvil */
+        object-fit: cover;
+      }
+      .half.left img {
+        content: url('images/envelope-full-mobile.png');
+        left: 0;
+      }
+      .half.right img {
+        content: url('images/envelope-full-mobile.png');
+        left: -100%;
+      }
     }
   </style>
 </head>
 <body>
   <div class="envelope-container" id="envelope">
-    <div class="half left"></div>
-    <div class="half right"></div>
+    <div class="half left">
+      <img src="images/envelope-full-desktop.png" alt="Left half">
+    </div>
+    <div class="half right">
+      <img src="images/envelope-full-desktop.png" alt="Right half">
+    </div>
   </div>
 
   <script>
     const envelope = document.getElementById('envelope');
 
     envelope.addEventListener('click', () => {
-      // Inicia la animación de apertura
       envelope.classList.add('open');
 
-      // Después de 1.2s (duración de la animación), hace fundido y redirige
       setTimeout(() => {
         envelope.classList.add('fade-out');
       }, 1100);
 
-      // Redirigir tras el fundido
       setTimeout(() => {
         window.location.href = 'main.html';
       }, 1800);
