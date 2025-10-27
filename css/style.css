@@ -1805,3 +1805,9 @@ form label {
 
 /*# sourceMappingURL=style.css.map */
 
+/* === Fondo marrón anaranjado desde la sección Eventi hacia abajo === */
+#fh5co-event,
+#fh5co-gallery,
+#fh5co-services {
+  background-color: #f5ece7 !important; /* Marrón anaranjado */
+}
