@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Martina ❤️ Luca - Invitación</title>
+<style>
+body, html {
+    margin: 0; padding: 0; height: 100%; overflow: hidden; background: #fff;
+    display: flex; justify-content: center; align-items: center;
+}
+.envelope {
+    position: relative;
+    width: 400px;  /* ajusta al tamaño real de la imagen */
+    height: 300px;
+    cursor: pointer;
+    perspective: 1000px;
+}
+.envelope .half {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    background: url('images/envelope.png') no-repeat center top;
+    background-size: cover;
+    transition: transform 1s ease-in-out;
+}
+.envelope .top { top: 0; transform-origin: bottom; }
+.envelope .bottom { bottom: 0; transform-origin: top; }
+.envelope.open .top { transform: rotateX(-180deg); }
+.envelope.open .bottom { transform: rotateX(0deg); }
+</style>
+</head>
+<body>
+
+<div class="envelope" id="envelope" aria-label="Abrir invitación">
+    <div class="half top"></div>
+    <div class="half bottom"></div>
+</div>
+
+<script>
+document.getElementById('envelope').addEventListener('click', function() {
+    this.classList.add('open');
+    setTimeout(function() {
+        window.location.href = 'index.html'; // web completa
+    }, 1000);
+});
+</script>
+
+</body>
+</html>
